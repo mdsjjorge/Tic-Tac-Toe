@@ -20,5 +20,5 @@ let squares = document.getElementsByClassName('square')
                     square.innerHTML = currentPlayer
                     changePlayer () 
                 }
-        })
-    }
+            })
+        }
