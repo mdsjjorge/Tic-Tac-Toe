@@ -1,8 +1,10 @@
 let squares = document.getElementsByClassName('square')
 let currentPlayer = 'X'
-let res = document.getElementById('#res')
+let res = document.getElementById('res')
 let winner = null
+let reset = document.getElementById('reset')
 let board = []
+let activeGame = true
 let winningCombos = [ [0,1,2],
                       [3,4,5],
                       [6,7,8],
@@ -14,6 +16,16 @@ let winningCombos = [ [0,1,2],
     
   // [winningCombos[linha][coluna]]
 
+  reset.addEventListener('click', () => {
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].innerHTML = ''
+    }
+    currentPlayer = "X"
+    res.innerHTML = ""
+    activeGame = true
+    board = ["","","","","","","","",""]
+  })
+
 const changePlayer = () => {
     if (currentPlayer === 'X') {
         currentPlayer = 'O'
@@ -23,22 +35,26 @@ const changePlayer = () => {
 }
 
 for (let i = 0; i < squares.length; i++) {
-    let square = squares[i]    
-    square.addEventListener('click', () => {
-        if (square.innerHTML === '') {
-            square.innerHTML = currentPlayer
-            updateBoard (i)
-            console.log(`board[${i}]= ${board[i]}`)
-            checkForWinner ()
-            changePlayer ()
-        } else if (board[i] === "X") {
-            alert(`Já tem 'X' ai, abestado!!`)
-        } else if (board[i] === "O") {
-            alert(`Já tem 'O' ai, abestado!!`)
-        }       
-}) }
+    let square = squares[i] 
 
-
+        square.addEventListener('click', () => {
+            if (activeGame && square.innerHTML === '') {
+                square.innerHTML = currentPlayer
+                updateBoard (i)
+                // console.log(`board[${i}]= ${board[i]}`)
+                checkForWinner ()
+                changePlayer ()
+            } else if (activeGame && board[i] === "X") {
+                alert(`Num tá vendo que já tem 'X' ai?`)
+            } else if (activeGame && board[i] === "O") {
+                alert(`Num tá vendo que já tem 'O' ai?`)
+            } else if (!activeGame) {
+                alert("O jogo acabou!!")
+            }
+            // console.log(activeGame)  
+            }  )  
+    }
+    
 const updateBoard = (i) => {
     board[i] = currentPlayer
 }
@@ -49,11 +65,11 @@ const checkForWinner = () => {
             board[winningCombos[i][1]] === currentPlayer && 
             board[winningCombos[i][2]] === currentPlayer) {
         winner = currentPlayer
+        res.innerHTML = `jogador ${winner} venceu!!`
         console.log(`winner is ${winner}`)
-        return true
+        activeGame = false
         }
     }
-    return false
 
 // ====================================
 // alternative logic
