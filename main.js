@@ -39,7 +39,10 @@ for (let i = 0; i < squares.length; i++) {
 
         square.addEventListener('click', () => {
             if (activeGame && square.innerHTML === '') {
-                square.innerHTML = currentPlayer
+                // square.innerHTML = currentPlayer
+                square = currentPlayer
+                screenRender (square)
+                // square.style.color = "green"
                 updateBoard (i)
                 // console.log(`board[${i}]= ${board[i]}`)
                 checkForWinner ()
@@ -54,6 +57,15 @@ for (let i = 0; i < squares.length; i++) {
             // console.log(activeGame)  
             }  )  
     }
+const screenRender = (square) => {
+    if (square == "X") {
+        square.innerHTML = "X"
+        square.style.color = "green"
+    } else () {
+        square.innerHTML = "O"
+        square.style.color = "blue"
+    }
+}
     
 const updateBoard = (i) => {
     board[i] = currentPlayer
