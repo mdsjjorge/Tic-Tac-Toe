@@ -1,6 +1,6 @@
 let squares = document.getElementsByClassName('square')
 let currentPlayer = 'X'
-let res = document.getElementById('res')
+let result = document.getElementById('result')
 let winner = null
 let reset = document.getElementById('reset')
 let board = []
@@ -21,7 +21,7 @@ let winningCombos = [ [0,1,2],
         squares[i].innerHTML = ''
     }
     currentPlayer = "X"
-    res.innerHTML = ""
+    result.innerHTML = ""
     activeGame = true
     board = ["","","","","","","","",""]
   })
@@ -65,7 +65,7 @@ const checkForWinner = () => {
             board[winningCombos[i][1]] === currentPlayer && 
             board[winningCombos[i][2]] === currentPlayer) {
         winner = currentPlayer
-        res.innerHTML = `jogador ${winner} venceu!!`
+        result.innerHTML = `jogador ${winner} venceu!!`
         console.log(`winner is ${winner}`)
         activeGame = false
         }
