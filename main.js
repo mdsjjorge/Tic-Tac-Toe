@@ -54,4 +54,32 @@ const checkForWinner = () => {
         }
     }
     return false
+
+// ====================================
+// alternative logic
+// ====================================
+
+    // let roundWon = false
+    // for (let j=0; j <= winningCombos.length; j++) {
+    //     const winCondition = winningCombos[j];
+    //     const a = board[winCondition[0]];
+    //     const b = board[winCondition[1]];
+    //     const c = board[winCondition[2]];
+    //     console.log(`a=${a},b=${b},c=${c} `)
+    //     if (a === '' || b === '' || c === '') {
+    //         roundWon = false;
+    //         continue;
+    //     } 
+    //     if (a === b && b === c) {
+    //         winner = currentPlayer
+    //         roundWon = true;
+    //         console.log(`winner is ${winner}`)
+    //         alert(`winner is  ${winner}`)
+    //         break;
+    //     }
+    // }
+    // if (roundWon) {
+    //     alert(`winner is ${currentPlayer}`)
+    // }
+
 }
