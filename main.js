@@ -55,10 +55,10 @@ for (let i = 0; i < squares.length; i++) {
 const screenRender = (square) => {  
     if (currentPlayer == "X") {
         square.innerHTML = "X"
-        square.style.color = "green"
+        square.style.color = "#ed1515"
     } else  {
         square.innerHTML = "O"
-        square.style.color = "blue"
+        square.style.color = "#3888f7"
     }
 }
     
