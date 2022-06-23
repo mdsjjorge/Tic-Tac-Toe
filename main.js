@@ -16,7 +16,7 @@ let winningCombos = [ [0,1,2],
     
   // [winningCombos[linha][coluna]]
 
-  reset.addEventListener('click', () => {
+reset.addEventListener('click', () => {
     for (let i = 0; i < squares.length; i++) {
         squares[i].innerHTML = ''
     }
@@ -24,7 +24,7 @@ let winningCombos = [ [0,1,2],
     result.innerHTML = ""
     activeGame = true
     board = ["","","","","","","","",""]
-  })
+})
 
 const changePlayer = () => {
     if (currentPlayer === 'X') {
@@ -36,32 +36,27 @@ const changePlayer = () => {
 
 for (let i = 0; i < squares.length; i++) {
     let square = squares[i] 
+    square.addEventListener('click', () => {
+        if (activeGame && square.innerHTML === '') {
+            screenRender (square)
+            updateBoard (i)
+            checkForWinner ()
+            changePlayer ()
+        } else if (activeGame && board[i] === "X") {
+            alert(`Já tem 'X' ai`)
+        } else if (activeGame && board[i] === "O") {
+            alert(`Já tem 'O' ai`)
+        } else if (!activeGame) {
+            alert("O jogo acabou!!")
+        }
+    })  
+}
 
-        square.addEventListener('click', () => {
-            if (activeGame && square.innerHTML === '') {
-                // square.innerHTML = currentPlayer
-                square = currentPlayer
-                screenRender (square)
-                // square.style.color = "green"
-                updateBoard (i)
-                // console.log(`board[${i}]= ${board[i]}`)
-                checkForWinner ()
-                changePlayer ()
-            } else if (activeGame && board[i] === "X") {
-                alert(`Num tá vendo que já tem 'X' ai?`)
-            } else if (activeGame && board[i] === "O") {
-                alert(`Num tá vendo que já tem 'O' ai?`)
-            } else if (!activeGame) {
-                alert("O jogo acabou!!")
-            }
-            // console.log(activeGame)  
-            }  )  
-    }
-const screenRender = (square) => {
-    if (square == "X") {
+const screenRender = (square) => {  
+    if (currentPlayer == "X") {
         square.innerHTML = "X"
         square.style.color = "green"
-    } else () {
+    } else  {
         square.innerHTML = "O"
         square.style.color = "blue"
     }
@@ -82,32 +77,4 @@ const checkForWinner = () => {
         activeGame = false
         }
     }
-
-// ====================================
-// alternative logic
-// ====================================
-
-    // let roundWon = false
-    // for (let j=0; j <= winningCombos.length; j++) {
-    //     const winCondition = winningCombos[j];
-    //     const a = board[winCondition[0]];
-    //     const b = board[winCondition[1]];
-    //     const c = board[winCondition[2]];
-    //     console.log(`a=${a},b=${b},c=${c} `)
-    //     if (a === '' || b === '' || c === '') {
-    //         roundWon = false;
-    //         continue;
-    //     } 
-    //     if (a === b && b === c) {
-    //         winner = currentPlayer
-    //         roundWon = true;
-    //         console.log(`winner is ${winner}`)
-    //         alert(`winner is  ${winner}`)
-    //         break;
-    //     }
-    // }
-    // if (roundWon) {
-    //     alert(`winner is ${currentPlayer}`)
-    // }
-
 }
