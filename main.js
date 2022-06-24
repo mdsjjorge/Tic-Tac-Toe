@@ -4,6 +4,7 @@ let result = document.getElementById('result')
 let winner = null
 let reset = document.getElementById('reset')
 let board = []
+let counter = 0
 let activeGame = true
 let winningCombos = [ [0,1,2],
                       [3,4,5],
@@ -23,7 +24,8 @@ reset.addEventListener('click', () => {
     currentPlayer = "X"
     result.innerHTML = ""
     activeGame = true
-    board = ["","","","","","","","",""]
+    board = []
+    counter = 0
 })
 
 const changePlayer = () => {
@@ -37,10 +39,12 @@ const changePlayer = () => {
 for (let i = 0; i < squares.length; i++) {
     let square = squares[i] 
     square.addEventListener('click', () => {
+        counter ++
         if (activeGame && square.innerHTML === '') {
             screenRender (square)
             updateBoard (i)
             checkForWinner ()
+            checkForTie ()
             changePlayer ()
         } else if (activeGame && board[i] === "X") {
             alert(`Já tem 'X' ai`)
@@ -50,6 +54,12 @@ for (let i = 0; i < squares.length; i++) {
             alert("O jogo acabou!!")
         }
     })  
+}
+
+const checkForTie = () => {
+    if (counter == 9 && !checkForWinner()) {
+        alert('empatou')
+    }
 }
 
 const screenRender = (square) => {  
@@ -75,6 +85,7 @@ const checkForWinner = () => {
         result.innerHTML = `${winner} venceu!!`
         console.log(`winner is ${winner}`)
         activeGame = false
+        return true
         }
-    }
+    } return false
 }
