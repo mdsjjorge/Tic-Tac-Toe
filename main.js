@@ -55,10 +55,10 @@ for (let i = 0; i < squares.length; i++) {
 const screenRender = (square) => {  
     if (currentPlayer == "X") {
         square.innerHTML = "X"
-        square.style.color = "#ed1515"
+        square.style.color = "#ddea27"
     } else  {
         square.innerHTML = "O"
-        square.style.color = "#3888f7"
+        square.style.color = "#1af4b2"
     }
 }
     
@@ -72,7 +72,7 @@ const checkForWinner = () => {
             board[winningCombos[i][1]] === currentPlayer && 
             board[winningCombos[i][2]] === currentPlayer) {
         winner = currentPlayer
-        result.innerHTML = `jogador ${winner} venceu!!`
+        result.innerHTML = `${winner} venceu!!`
         console.log(`winner is ${winner}`)
         activeGame = false
         }
