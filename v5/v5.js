@@ -2,6 +2,7 @@ let squares = document.getElementsByClassName('square')
 let resultado = []
 let jogadorAtual = 'X'
 let contador = 0
+let reset = document.getElementById('reset')
 
 // condições de vitória
 //     [0,1,2],
@@ -12,6 +13,15 @@ let contador = 0
 //     [2,5,8],
 //     [0,4,8],
 //     [2,4,6] 
+
+reset.addEventListener( 'click', function () {
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].innerHTML = ''
+        contador = 0
+        jogadorAtual ='X'
+        resultado = []
+    }
+})
 
 function mudarJogador () {
     if (jogadorAtual === 'X'){
