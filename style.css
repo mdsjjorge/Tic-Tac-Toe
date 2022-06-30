@@ -27,6 +27,10 @@ body {
                 0 0 102px #0fa;
                 /* 0 0 151px #0fa; */
 }
+#back-screen {
+    background-color: rgb(43, 103, 67);
+    opacity: 0.8;
+}
 .content {
     display: flex;
     flex-wrap: wrap;

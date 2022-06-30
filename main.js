@@ -3,6 +3,7 @@ let currentPlayer = 'X'
 let result = document.getElementById('result')
 let winner = null
 let reset = document.getElementById('reset')
+const blackscreen = document.getElementById('black-screen')
 let board = []
 let counter = 0
 let activeGame = true
@@ -58,7 +59,8 @@ for (let i = 0; i < squares.length; i++) {
 
 const checkForTie = () => {
     if (counter == 9 && !checkForWinner()) {
-        alert('empatou')
+        // alert('empatou')
+
     }
 }
 
@@ -85,7 +87,12 @@ const checkForWinner = () => {
         result.innerHTML = `${winner} venceu!!`
         console.log(`winner is ${winner}`)
         activeGame = false
+        blackScreen ()
         return true
         }
     } return false
+}
+
+const blackScreen = () => {
+
 }
