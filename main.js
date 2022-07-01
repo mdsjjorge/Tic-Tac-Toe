@@ -3,7 +3,7 @@ let currentPlayer = 'X'
 let result = document.getElementById('result')
 let winner = null
 let reset = document.getElementById('reset')
-const blackscreen = document.getElementById('black-screen')
+let blackscreen = document.getElementById('black-screen')
 let board = []
 let counter = 0
 let activeGame = true
@@ -18,16 +18,9 @@ let winningCombos = [ [0,1,2],
     
   // [winningCombos[linha][coluna]]
 
-reset.addEventListener('click', () => {
-    for (let i = 0; i < squares.length; i++) {
-        squares[i].innerHTML = ''
-    }
-    currentPlayer = "X"
-    result.innerHTML = ""
-    activeGame = true
-    board = []
-    counter = 0
-})
+// ========================================
+// muda jogador
+// ========================================
 
 const changePlayer = () => {
     if (currentPlayer === 'X') {
@@ -37,32 +30,17 @@ const changePlayer = () => {
     }
 }
 
-for (let i = 0; i < squares.length; i++) {
-    let square = squares[i] 
-    square.addEventListener('click', () => {
-        counter ++
-        if (activeGame && square.innerHTML === '') {
-            screenRender (square)
-            updateBoard (i)
-            checkForWinner ()
-            checkForTie ()
-            changePlayer ()
-        } else if (activeGame && board[i] === "X") {
-            alert(`Já tem 'X' ai`)
-        } else if (activeGame && board[i] === "O") {
-            alert(`Já tem 'O' ai`)
-        } else if (!activeGame) {
-            alert("O jogo acabou!!")
-        }
-    })  
+// ========================================
+// atualiza board
+// ========================================
+
+const updateBoard = (i) => {
+    board[i] = currentPlayer
 }
 
-const checkForTie = () => {
-    if (counter == 9 && !checkForWinner()) {
-        // alert('empatou')
-
-    }
-}
+// ========================================
+// renderiza square a partir do click
+// ========================================
 
 const screenRender = (square) => {  
     if (currentPlayer == "X") {
@@ -73,10 +51,10 @@ const screenRender = (square) => {
         square.style.color = "#1af4b2"
     }
 }
-    
-const updateBoard = (i) => {
-    board[i] = currentPlayer
-}
+
+// ========================================
+// verifica vencedor
+// ========================================
 
 const checkForWinner = () => {
     for (let i=0; i < winningCombos.length; i++) {
@@ -93,6 +71,60 @@ const checkForWinner = () => {
     } return false
 }
 
-const blackScreen = () => {
+// ========================================
+// verifica empate
+// ========================================
+
+const checkForTie = () => {
+    if (counter == 9 && !checkForWinner()) {
+        result.innerHTML = "empatou!"
+    }
+}
+
+// ========================================
+// renderiza a linha de vitória
+// ========================================
+
+const lineScreen = () => {
 
 }
+
+// ========================================
+// preenche os squares
+// ========================================
+
+for (let i = 0; i < squares.length; i++) {
+    let square = squares[i] 
+    square.addEventListener('click', () => {
+        counter ++
+        if (activeGame && square.innerHTML === '') {
+            screenRender (square)
+            updateBoard (i)
+            checkForWinner ()
+            checkForTie ()
+            changePlayer ()
+        } else if (activeGame && board[i] === "X") {
+            result.innerHTML = "Já tem 'X' ai"
+        } else if (activeGame && board[i] === "O") {
+            result.innerHTML = "Já tem 'O' ai"
+        } else if (!activeGame) {
+            result.innerHTML = `O jogo acabou! ${winner} venceu!`
+        }
+    })  
+}
+
+// ========================================
+// reset
+// ========================================
+
+reset.addEventListener('click', () => {
+    for (let i = 0; i < squares.length; i++) {
+        squares[i].innerHTML = ''
+    }
+    currentPlayer = "X"
+    result.innerHTML = "on"
+    activeGame = true
+    board = []
+    counter = 0
+})
+
