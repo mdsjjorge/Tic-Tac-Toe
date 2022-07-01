@@ -3,7 +3,7 @@ let currentPlayer = 'X'
 let result = document.getElementById('result')
 let winner = null
 let reset = document.getElementById('reset')
-let blackscreen = document.getElementById('black-screen')
+let putStrikers = document.querySelector(".strike");
 let board = []
 let counter = 0
 let activeGame = true
@@ -42,7 +42,7 @@ const updateBoard = (i) => {
 // renderiza square a partir do click
 // ========================================
 
-const screenRender = (square) => {  
+const squareRender = (square) => {  
     if (currentPlayer == "X") {
         square.innerHTML = "X"
         square.style.color = "#ddea27"
@@ -50,6 +50,14 @@ const screenRender = (square) => {
         square.innerHTML = "O"
         square.style.color = "#1af4b2"
     }
+}
+
+// ========================================
+// renderiza a linha de vitória
+// ========================================
+
+const lineRender = (i) => {
+    putStrikers.setAttribute('class',`strike strike-${i}`);
 }
 
 // ========================================
@@ -63,9 +71,8 @@ const checkForWinner = () => {
             board[winningCombos[i][2]] === currentPlayer) {
         winner = currentPlayer
         result.innerHTML = `${winner} venceu!!`
-        console.log(`winner is ${winner}`)
+        lineRender(i)
         activeGame = false
-        blackScreen ()
         return true
         }
     } return false
@@ -82,14 +89,6 @@ const checkForTie = () => {
 }
 
 // ========================================
-// renderiza a linha de vitória
-// ========================================
-
-const lineScreen = () => {
-
-}
-
-// ========================================
 // preenche os squares
 // ========================================
 
@@ -98,7 +97,7 @@ for (let i = 0; i < squares.length; i++) {
     square.addEventListener('click', () => {
         counter ++
         if (activeGame && square.innerHTML === '') {
-            screenRender (square)
+            squareRender (square)
             updateBoard (i)
             checkForWinner ()
             checkForTie ()
@@ -126,5 +125,6 @@ reset.addEventListener('click', () => {
     activeGame = true
     board = []
     counter = 0
+    putStrikers.setAttribute('class',`strike`);
 })
 
