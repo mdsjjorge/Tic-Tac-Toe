@@ -6,6 +6,8 @@ let reset = document.getElementById('reset')
 let putStrikers = document.querySelector(".strike");
 let board = []
 let counter = 0
+let currentScoreX = 0;
+let currentScoreO = 0;
 let activeGame = true
 let winningCombos = [ 
     [0,1,2],
@@ -63,6 +65,23 @@ const lineRender = (i) => {
 }
 
 // ========================================
+// atualiza pontuação
+// ========================================
+
+const updateScore = (winner) => {
+    let scoreX = document.querySelector('.scoreX')
+    let scoreO = document.querySelector('.scoreO')
+
+    if (winner === 'X') {
+        currentScoreX ++
+    } else {
+        currentScoreO ++
+    }
+    scoreX.innerHTML = currentScoreX
+    scoreO.innerHTML = currentScoreO
+}
+
+// ========================================
 // verifica vencedor
 // ========================================
 
@@ -74,6 +93,7 @@ const checkForWinner = () => {
             winner = currentPlayer
             result.innerHTML = `${winner} venceu!!`
             lineRender(i)
+            updateScore(winner)
             activeGame = false
             return true
         }

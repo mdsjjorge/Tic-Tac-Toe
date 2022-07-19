@@ -13,7 +13,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 .title {
-    margin: 50px;
+    margin: 30px;
     font-size: 2rem;
     color: #fff;
       text-shadow:
@@ -40,6 +40,28 @@ body {
     padding: 15px;
     color: white;
 }
+#scores {
+    color: white;
+    margin-top: 30px;
+}
+.player-content {
+    display: flex;
+    justify-content: space-between;
+}
+.playerX {
+    font-size: 1.5rem;
+    color: #ddea27;
+}
+.playerO {
+    font-size: 1.5rem;
+    color: #1af4b2;
+}
+.scoreX {
+    margin: 5px;
+}
+.scoreO {
+    margin: 5px;
+}
 #reset {
     padding: 5px 20px;
     cursor: pointer;
@@ -57,7 +79,7 @@ footer {
 }
 
 /* ==========================
-strike
+square
 ============================= */
 
 .square {
