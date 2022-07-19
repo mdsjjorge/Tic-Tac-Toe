@@ -7,16 +7,18 @@ let putStrikers = document.querySelector(".strike");
 let board = []
 let counter = 0
 let activeGame = true
-let winningCombos = [ [0,1,2],
-                      [3,4,5],
-                      [6,7,8],
-                      [0,3,6],
-                      [1,4,7],
-                      [2,5,8],
-                      [0,4,8],
-                      [2,4,6] ]
+let winningCombos = [ 
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6] 
+]
     
-  // [winningCombos[linha][coluna]]
+// [winningCombos[linha][coluna]]
 
 // ========================================
 // muda jogador
@@ -69,13 +71,14 @@ const checkForWinner = () => {
         if (board[winningCombos[i][0]] === currentPlayer && 
             board[winningCombos[i][1]] === currentPlayer && 
             board[winningCombos[i][2]] === currentPlayer) {
-        winner = currentPlayer
-        result.innerHTML = `${winner} venceu!!`
-        lineRender(i)
-        activeGame = false
-        return true
+            winner = currentPlayer
+            result.innerHTML = `${winner} venceu!!`
+            lineRender(i)
+            activeGame = false
+            return true
         }
-    } return false
+    }     
+    return false
 }
 
 // ========================================
@@ -102,10 +105,8 @@ for (let i = 0; i < squares.length; i++) {
             checkForWinner ()
             checkForTie ()
             changePlayer ()
-        } else if (activeGame && board[i] === "X") {
-            result.innerHTML = "Já tem 'X' ai"
-        } else if (activeGame && board[i] === "O") {
-            result.innerHTML = "Já tem 'O' ai"
+        } else if (activeGame && board[i] !== '' ) {
+            result.innerHTML = `Já tem ${board[i]} ai.`                
         } else if (!activeGame) {
             result.innerHTML = `O jogo acabou! ${winner} venceu!`
         }
